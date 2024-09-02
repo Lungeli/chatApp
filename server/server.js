@@ -1,4 +1,5 @@
 import express from "express"
+import cors from 'cors';
 import dotenv from "dotenv"
 import cookieParser from "cookie-parser";
 
@@ -11,6 +12,7 @@ import connectToMongoDB from "./db/connectToMongoDB.js";
 dotenv.config()
 
 const app = express();
+app.use(cors());
 const PORT = process.env.PORT;
 
 
