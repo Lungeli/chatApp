@@ -29,23 +29,18 @@ const useSignup = () => {
 
 		setLoading(true);
 		try {
-			const res = await fetch('http://localhost:5000/auth/signup', {
+			const res = await fetch('http://localhost:5000/api/auth/signup', {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ fullName, userName, password, confirmPassword, gender }),
 			});
 
-            if (!res.ok) {
-                const errorText = await res.text(); 
-                throw new Error(errorText || 'Failed to sign up. Please try again.');
-              }
-
 			const data = await res.json();
 			if (data.error) {
 				throw new Error(data.error);
 			}
-			localStorage.setItem("chat-user", JSON.stringify(data));
-			setAuthUser(data);
+			toast.success("Successfully signed up!");
+
 		} catch (error) {
 			toast.error(error.message);
 		} finally {

@@ -4,7 +4,7 @@ import generateTokenAndSetCookie from "../utils/generateToken.js";
 
 export const signup = async (req, res) => {
    
-    // Helper function to get random profile picture URL
+    
     //https://avatar-placeholder.iran.liara.run/ | 1-50 has male pictures, 50-100 has female
     const getRandomProfilePic = (gender) => {
         let min = 1;
@@ -44,8 +44,8 @@ export const signup = async (req, res) => {
         })
 
         if(newUser){
-            await newUser.save();
             generateTokenAndSetCookie(newUser._id, res);
+            await newUser.save();
             res.status(201).json({
                 _id: newUser._id,
                 fullName: newUser.fullName,
